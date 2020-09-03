@@ -176,11 +176,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Contracts\IHamburgerMenuItemViewModel.cs" />
+    <Compile Include="Contracts\IMenuItemViewModel.cs" />
+    <Compile Include="Events\UpdateUIEvent.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Services\LocalizationProvider.cs" />
     <Compile Include="ViewModels\FlyoutBaseViewModel.cs" />
-    <Compile Include="ViewModels\HamburgerMenuItemViewModel.cs" />
+    <Compile Include="ViewModels\MenuItemViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="Contracts\IFlyoutBaseViewModel.cs" />
     <Compile Include="ViewModels\UserInfoFlyoutViewModel.cs" />

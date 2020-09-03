@@ -126,4 +126,31 @@
   <data name="HomeViewName" xml:space="preserve">
     <value>Startbildschrim</value>
   </data>
+  <data name="SettingsViewName" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="HomeViewToolTip" xml:space="preserve">
+    <value>Auswahl Startbildschirm</value>
+  </data>
+  <data name="HomeViewLabel" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="SettingsViewLabel" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="SettingsViewToolTip" xml:space="preserve">
+    <value>Auswahl Einstellungen</value>
+  </data>
+  <data name="LoginDialogTitle" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="LoginDialogMessage" xml:space="preserve">
+    <value>Bitte loggen Sie sich ein</value>
+  </data>
+  <data name="UserInfoFlyoutCaption" xml:space="preserve">
+    <value>Benutzerinformationen</value>
+  </data>
+  <data name="UserInfoFlyoutText" xml:space="preserve">
+    <value>Hier stehen meine Informationen.</value>
+  </data>
 </root>

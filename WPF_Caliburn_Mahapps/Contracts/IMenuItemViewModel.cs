@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace WPF_Caliburn_Mahapps.Contracts
 {
-    public interface IHamburgerMenuItemViewModel : IHamburgerMenuItemBase
+    public interface IMenuItemViewModel : IHamburgerMenuItemBase
     {
         object Icon { get; }
         object Label { get; }
         object Tag { get; }
         object ToolTip { get; }
-        
+                 
     }
 }

@@ -13,14 +13,31 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock FontSize="50"
-                   HorizontalAlignment = "Center"
+                   HorizontalAlignment = "Left"
                    VerticalAlignment = "Center"
                    Text="{lex:Loc HomeViewName}"/>
-        <TextBlock FontSize="20" 
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="Display Name: " Width="100" />
+                <TextBlock FontSize="20" 
                    HorizontalAlignment = "Center"
                    VerticalAlignment = "Center"
-                   Text="{Binding DisplayName}" />
-
-
+                   Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="Label: " Width="100" />
+                <TextBlock FontSize="20" 
+                   HorizontalAlignment = "Center"
+                   VerticalAlignment = "Center"
+                   Text="{Binding Label, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="ToolTip: " Width="100" />
+                <TextBlock FontSize="20" 
+                   HorizontalAlignment = "Center"
+                   VerticalAlignment = "Center"
+                   Text="{Binding ToolTip, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </StackPanel>
     </StackPanel>
 </UserControl>

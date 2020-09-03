@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using Autofac;
+using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,10 @@ using WPF_Caliburn_Mahapps.Contracts;
 
 namespace WPF_Caliburn_Mahapps.ViewModels
 {
-    public class HamburgerMenuItemViewModel : Screen, IHamburgerMenuItemViewModel
+    public class MenuItemViewModel : Screen, IMenuItemViewModel
     {
+        public IEventAggregator Events;
+
         private object _icon;
         public object Icon
         {
@@ -47,10 +50,25 @@ namespace WPF_Caliburn_Mahapps.ViewModels
         }
 
         public ShellViewModel ShellViewModel { get; }
+        public IComponentContext Context { get; }
 
-        public HamburgerMenuItemViewModel(ShellViewModel shellViewModel)
+        public MenuItemViewModel(ShellViewModel shellViewModel, IComponentContext context)
         {
             ShellViewModel = shellViewModel;
+
+            Events = context.Resolve<IEventAggregator>();
+            Events.Subscribe(this);
         }
+
+        /// <summary>
+        /// Update the UI by changing the language
+        /// </summary>
+        public virtual void UpdateUI()
+        {
+
+        }
+        
+
+
     }
 }

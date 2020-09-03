@@ -79,11 +79,92 @@ namespace WPF_Caliburn_Mahapps.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Home ähnelt.
+        /// </summary>
+        internal static string HomeViewLabel {
+            get {
+                return ResourceManager.GetString("HomeViewLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Home view ähnelt.
         /// </summary>
         internal static string HomeViewName {
             get {
                 return ResourceManager.GetString("HomeViewName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Choose home ähnelt.
+        /// </summary>
+        internal static string HomeViewToolTip {
+            get {
+                return ResourceManager.GetString("HomeViewToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please login ähnelt.
+        /// </summary>
+        internal static string LoginDialogMessage {
+            get {
+                return ResourceManager.GetString("LoginDialogMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Login ähnelt.
+        /// </summary>
+        internal static string LoginDialogTitle {
+            get {
+                return ResourceManager.GetString("LoginDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Settings ähnelt.
+        /// </summary>
+        internal static string SettingsViewLabel {
+            get {
+                return ResourceManager.GetString("SettingsViewLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Settings view ähnelt.
+        /// </summary>
+        internal static string SettingsViewName {
+            get {
+                return ResourceManager.GetString("SettingsViewName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Choose settings ähnelt.
+        /// </summary>
+        internal static string SettingsViewToolTip {
+            get {
+                return ResourceManager.GetString("SettingsViewToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die User information ähnelt.
+        /// </summary>
+        internal static string UserInfoFlyoutCaption {
+            get {
+                return ResourceManager.GetString("UserInfoFlyoutCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Here are my infos. ähnelt.
+        /// </summary>
+        internal static string UserInfoFlyoutText {
+            get {
+                return ResourceManager.GetString("UserInfoFlyoutText", resourceCulture);
             }
         }
     }

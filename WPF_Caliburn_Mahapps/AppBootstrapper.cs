@@ -34,7 +34,7 @@ namespace WPF_Caliburn_Mahapps
             builder.RegisterInstance(log4net.LogManager.GetLogger("Log")).As<log4net.ILog>();
 
             //Register dialog coordinator
-            builder.RegisterType<DialogCoordinator>().As<IDialogCoordinator>().SingleInstance();//Register dialog coordinator
+            builder.RegisterType<DialogCoordinator>().As<IDialogCoordinator>().SingleInstance();
 
 
         }

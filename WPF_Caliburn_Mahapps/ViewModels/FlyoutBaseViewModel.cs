@@ -1,8 +1,10 @@
-﻿using Caliburn.Micro;
+﻿using Autofac;
+using Caliburn.Micro;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using WPF_Caliburn_Mahapps.Contracts;
@@ -11,6 +13,8 @@ namespace WPF_Caliburn_Mahapps.ViewModels
 {
     public class FlyoutBaseViewModel : PropertyChangedBase, IFlyoutBaseViewModel
     {
+        public readonly IEventAggregator Events;
+
         private string _name;
         /// <summary>
         /// Name for the flyout object
@@ -96,6 +100,12 @@ namespace WPF_Caliburn_Mahapps.ViewModels
                 }
                 Set(ref _theme, value);
             }
+        }
+
+        public FlyoutBaseViewModel(IComponentContext context)
+        {
+            Events = context.Resolve<IEventAggregator>();
+            Events.Subscribe(this);
         }
 
     }

@@ -21,7 +21,7 @@
         
         <!--  this is the template for the items (options too)  -->
         <DataTemplate x:Key="MenuItemTemplate" 
-                      DataType="{x:Type viewModels:HamburgerMenuItemViewModel}">
+                      DataType="{x:Type viewModels:MenuItemViewModel}">
             <Grid x:Name="RootGrid"
                   Height="48"
                   Background="Transparent">
@@ -41,7 +41,7 @@
                 <TextBlock Grid.Column="1"
                                VerticalAlignment="Center"
                                FontSize="16"
-                               Text="{Binding Label}" />
+                               Text="{Binding Label, UpdateSourceTrigger=PropertyChanged}" />
                 
                 <!-- Interaction trigger to set caliburn activeitem -->
                 <i:Interaction.Triggers>
@@ -119,7 +119,7 @@
                             Background="#FF444444" 
                             MinHeight="30" >
                         <TextBlock x:Name="Header" 
-                                   Text="{Binding ActiveItem.DisplayName}"
+                                   Text="{Binding ActiveItem.DisplayName, UpdateSourceTrigger=PropertyChanged}"
                                    HorizontalAlignment="Center" 
                                    VerticalAlignment="Center" 
                                    FontSize="15"
@@ -132,12 +132,10 @@
                         <StackPanel Orientation="Horizontal" 
                                     HorizontalAlignment="Right" VerticalAlignment="Center" 
                                     Margin="20,0">
-                            <ComboBox ItemsSource="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=MergedAvailableCultures}"
-                                      SelectedItem="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=Culture}" DisplayMemberPath="NativeName" />
-                            <!--<Label Name="DbStatusLabel" Content="{lex:Loc}" Foreground="Black" Margin="10,0" />
-                            <Image Height="20" 
-                                   Source="{Binding IsDbReady, Converter={StaticResource DbStatusToImageConverter}}" 
-                                   ToolTip="{Binding IsDbReady, Converter={StaticResource DbStatusToTextConverter}}"/>-->
+                            <!--<ComboBox ItemsSource="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=MergedAvailableCultures}"
+                                      SelectedItem="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=Culture}" DisplayMemberPath="NativeName" />-->
+                            <ComboBox ItemsSource="{Binding SupportedLanguages}"
+                                      SelectedItem="{Binding SelectedLanguage}" DisplayMemberPath="NativeName" />
                         </StackPanel>
                     </Border>
 

@@ -126,4 +126,40 @@
     <value>Home view</value>
     <comment>HomeView</comment>
   </data>
+  <data name="SettingsViewName" xml:space="preserve">
+    <value>Settings view</value>
+    <comment>SettingsView</comment>
+  </data>
+  <data name="HomeViewToolTip" xml:space="preserve">
+    <value>Choose home</value>
+    <comment>Home</comment>
+  </data>
+  <data name="HomeViewLabel" xml:space="preserve">
+    <value>Home</value>
+    <comment>Home view</comment>
+  </data>
+  <data name="SettingsViewLabel" xml:space="preserve">
+    <value>Settings</value>
+    <comment>Settings view</comment>
+  </data>
+  <data name="SettingsViewToolTip" xml:space="preserve">
+    <value>Choose settings</value>
+    <comment>Settings</comment>
+  </data>
+  <data name="LoginDialogTitle" xml:space="preserve">
+    <value>Login</value>
+    <comment>Login</comment>
+  </data>
+  <data name="LoginDialogMessage" xml:space="preserve">
+    <value>Please login</value>
+    <comment>Please login</comment>
+  </data>
+  <data name="UserInfoFlyoutCaption" xml:space="preserve">
+    <value>User information</value>
+    <comment>User infos</comment>
+  </data>
+  <data name="UserInfoFlyoutText" xml:space="preserve">
+    <value>Here are my infos.</value>
+    <comment>User infos</comment>
+  </data>
 </root>

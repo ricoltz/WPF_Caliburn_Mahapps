@@ -13,16 +13,21 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using WPF_Caliburn_Mahapps.Contracts;
+using WPF_Caliburn_Mahapps.Events;
 using WPF_Caliburn_Mahapps.Services;
+using WPFLocalizeExtension.Engine;
 
 namespace WPF_Caliburn_Mahapps.ViewModels
 {
-    public class ShellViewModel : Conductor<object>
+    public class ShellViewModel : Conductor<object>, IHandle<UpdateUIEvent>
     {
         #region Private Vars
 
         //The logger
-        private log4net.ILog _log;        
+        private log4net.ILog _log;
+
+        //EventAggregator
+        private readonly IEventAggregator _events;
 
         //Dialogcoordinator
         private IDialogCoordinator _dialogs;
@@ -38,21 +43,21 @@ namespace WPF_Caliburn_Mahapps.ViewModels
 
         #region UI Properties
 
-        private ObservableCollection<HamburgerMenuItemViewModel> _menuItems;
+        private ObservableCollection<MenuItemViewModel> _menuItems;
         /// <summary>
         /// Hamburger menu items
         /// </summary>
-        public ObservableCollection<HamburgerMenuItemViewModel> MenuItems
+        public ObservableCollection<MenuItemViewModel> MenuItems
         {
             get { return _menuItems; }
             //set { Set( ref _menuItems, value); }
         }
 
-        private BindableCollection<HamburgerMenuItemViewModel> _optionMenuItems;
+        private BindableCollection<MenuItemViewModel> _optionMenuItems;
         /// <summary>
         /// Hamburger option menu items
         /// </summary>
-        public BindableCollection<HamburgerMenuItemViewModel> OptionMenuItems
+        public BindableCollection<MenuItemViewModel> OptionMenuItems
         {
             get { return _optionMenuItems; }
             //set { Set( ref _optionMenuItems, value); }
@@ -68,21 +73,25 @@ namespace WPF_Caliburn_Mahapps.ViewModels
             //set { Set( ref _flyoutItems, value); }
         }
 
-        ///// <summary>
-        ///// Language support
-        ///// </summary>
-        //public IList<CultureInfo> SupportedLanguages
-        //{ 
-        //    get => _localizerService.SupportedLanguages ?? null; 
-        //}
+        /// <summary>
+        /// Language support
+        /// </summary>
+        public IList<CultureInfo> SupportedLanguages
+        {
+            get => LocalizeDictionary.Instance.MergedAvailableCultures;
+        }
 
         /// <summary>
         /// Selected language
         /// </summary>
         public CultureInfo SelectedLanguage
         {
-            get => _localizerService.SelectedLanguage ?? null;
-            set => SelectedLanguage = value ?? null;
+            get => LocalizeDictionary.Instance.Culture;
+            set 
+            { 
+                LocalizeDictionary.Instance.Culture = value;
+                _events.PublishOnUIThread(new UpdateUIEvent());
+            }
         }
 
         #endregion
@@ -96,21 +105,25 @@ namespace WPF_Caliburn_Mahapps.ViewModels
         /// <param name="container"></param>
         public ShellViewModel(IComponentContext container)
         {
-            DisplayName = LocalizationProvider.GetLocalizedValue<string>("AppName");
+            UpdateUI();
 
             //Resolve the logger
-            _log = container.Resolve<log4net.ILog>();            
+            _log = container.Resolve<log4net.ILog>();
+
+            //Resolve the eventaggregator
+            _events = container.Resolve<IEventAggregator>();
+            _events.Subscribe(this);
 
             //Resolve the dialog coordinator
             _dialogs = container.Resolve<IDialogCoordinator>();
 
             //Init hamburger and flyouts item lists
-            _menuItems = new BindableCollection<HamburgerMenuItemViewModel>();
-            _optionMenuItems = new BindableCollection<HamburgerMenuItemViewModel>();
+            _menuItems = new BindableCollection<MenuItemViewModel>();
+            _optionMenuItems = new BindableCollection<MenuItemViewModel>();
             _flyoutItems = new BindableCollection<FlyoutBaseViewModel>();
 
             //Resolve hamburger viewmodels
-            _homeViewModel = container.Resolve<HomeViewModel>(new NamedParameter ("shellViewModel", this ));
+            _homeViewModel = container.Resolve<HomeViewModel>(new NamedParameter("shellViewModel", this));
             _settingsViewModel = container.Resolve<SettingsViewModel>(new NamedParameter("shellViewModel", this));
 
             //Resolve flyout viewmodels
@@ -127,7 +140,7 @@ namespace WPF_Caliburn_Mahapps.ViewModels
         /// Create menu items and menu option items
         /// </summary>
         public void CreateMenuItems()
-        {           
+        {
             //MenuItems
             MenuItems.Add(_homeViewModel);
 
@@ -146,7 +159,7 @@ namespace WPF_Caliburn_Mahapps.ViewModels
         /// <param name="hamburgerMenuItemViewModel"></param>
         public void SetContent(object hamburgerMenuItemViewModel)
         {
-            ActiveItem = hamburgerMenuItemViewModel as HamburgerMenuItemViewModel;
+            ActiveItem = hamburgerMenuItemViewModel as MenuItemViewModel;
         }
 
         /// <summary>
@@ -166,10 +179,10 @@ namespace WPF_Caliburn_Mahapps.ViewModels
         /// <param name="isModal"></param>
         /// <param name="show"></param>
         /// <param name="theme"></param>
-        protected void ApplyToggleFlyout(string name, 
-                                         Position? position = null, 
-                                         bool? isModal = null, 
-                                         bool? show = null, 
+        protected void ApplyToggleFlyout(string name,
+                                         Position? position = null,
+                                         bool? isModal = null,
+                                         bool? show = null,
                                          FlyoutTheme? theme = null)
         {
             Contract.Requires(name != null, "name cannot be null");
@@ -182,7 +195,7 @@ namespace WPF_Caliburn_Mahapps.ViewModels
                 return;
             }
 
-            if (position.HasValue) 
+            if (position.HasValue)
                 flyout.Position = position.Value;
 
             if (isModal.HasValue)
@@ -205,15 +218,27 @@ namespace WPF_Caliburn_Mahapps.ViewModels
 
         public async void LogMeIn()
         {
-            var data = await _dialogs.ShowLoginAsync(this, "Login", "Bitte loggen Sie sich ein");           
+            string title = LocalizationProvider.GetLocalizedValue<string>("LoginDialogTitle");
+            string message = LocalizationProvider.GetLocalizedValue<string>("LoginDialogMessage");
+
+            var data = await _dialogs.ShowLoginAsync(this, title, message);
+        }
+
+
+        private void UpdateUI()
+        {
+            DisplayName = LocalizationProvider.GetLocalizedValue<string>("AppName");
 
         }
 
 
-
         #endregion
 
-
-
+        #region Events        
+        public void Handle(UpdateUIEvent message)
+        {
+            UpdateUI();
+        }
+        #endregion
     }
 }

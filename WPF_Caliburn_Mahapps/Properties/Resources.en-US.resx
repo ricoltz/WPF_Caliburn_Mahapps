@@ -124,6 +124,33 @@
     <value>Demo App</value>
   </data>
   <data name="HomeViewName" xml:space="preserve">
-    <value>Home View</value>
+    <value>Home</value>
+  </data>
+  <data name="SettingsViewName" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="HomeViewToolTip" xml:space="preserve">
+    <value>Choose home</value>
+  </data>
+  <data name="HomeViewLabel" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="SettingsViewLabel" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SettingsViewToolTip" xml:space="preserve">
+    <value>Choose settings</value>
+  </data>
+  <data name="LoginDialogTitle" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginDialogMessage" xml:space="preserve">
+    <value>Please login</value>
+  </data>
+  <data name="UserInfoFlyoutCaption" xml:space="preserve">
+    <value>User information</value>
+  </data>
+  <data name="UserInfoFlyoutText" xml:space="preserve">
+    <value>Here are my infos.</value>
   </data>
 </root>
